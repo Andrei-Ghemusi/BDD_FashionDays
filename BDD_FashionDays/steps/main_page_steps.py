@@ -67,3 +67,8 @@ def step_impl(context):
 @when('I switch to the newly opened tab')
 def step_impl(context):
     context.base_page.switch_window(1)
+
+@when('I click on the social media link with the name "{link_text}" and element "{element_xpath}"')
+def step_impl(context, element_xpath, link_text):
+    context.base_page.assert_text(element_xpath, link_text)
+    context.base_page.click_element(element_xpath)

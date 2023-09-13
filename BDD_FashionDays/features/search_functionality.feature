@@ -7,25 +7,25 @@ Feature: verify that the search functionality works correctly
     When I write in the search input the word "nike"
 
 
-   @search
+   @search @suggestion
    Scenario: verify that the after writing in the search bar, the suggestion we receive is correct
      Then I receive a suggestion that contains the searched word
 
 
-  @search
+  @search @products
   Scenario: verify that after searching a product, the first 5 products with that name will be displayed
     When I press enter
     Then I see the search results of the product written
 
 
-  @search
+  @search @price_filter
   Scenario: verify that when the price filter is set to 0, there are no products shown
     When I press enter
     When I set the price filter to zero
     Then There are no products shown and I see message "Nu au fost gasite produse."
 
 
-  @search
+  @search @delete_filters
   Scenario: verify that after clicking "delete all filters" all filters are deleted
     When I press enter
     When I choose the category slippers
@@ -33,7 +33,7 @@ Feature: verify that the search functionality works correctly
     When I click on delete filters button
     Then The filters have been removed and I see all the products
 
-  @cart
+  @search @cart
   Scenario: test that products are added to and removed from the basket
     When I press enter
     When I click on the first product

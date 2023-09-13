@@ -42,31 +42,26 @@ Feature: check the functionalities of the authentication page
         | pythontestemail083@gmail.com | TestEmail123  |
 
 
+      @authentication_page @logout
+      Scenario: while logged in, check that after logging out, the state change from "logged in" to "logged out"
+        When I move to account and click on the logout button
+        When I click on account
+        Then I am logged out and I am redirected on the authentication page
+
+
       @authentication_page @facebook_login
-      Scenario Outline: verify that you can login using facebook
-        When I click on the facebook login button "<facebook_login_button>"
+      Scenario: verify that you can login using facebook
+        When I click on the facebook login button
         When I switch to the popup window
-        When I accept Facebook cookies "<facebook_cookies>"
+        When I accept Facebook cookies
         When I insert an email and a password
-        When I click the login button from the pop up "<pop_up_login>"
+        When I click the login button from the pop up
+        When I wait for the application to login
         When I switch back to the main_page window
         Then I am successfully logged in and I check the account status
-      Examples:
-        | facebook_login_button                             | facebook_cookies                      | pop_up_login            |
-        | //*[@id="login"]/div[4]/div[2]/button/div/span[2] | //button[text()="Allow all cookies"]  | //*[@id="loginbutton"]  |
 
 
-      @authentication_page @logout
-      Scenario Outline: while logged in, check that after logging out, the state change from "logged in" to "logged out"
-        When I insert an "<email>" into the email box
-        When I insert a "<password>" into the password box
-        When I click on the login button
-        When I move to "<account_element>" and click on the logout "<logout_button>"
-        When I click on the "<account_element>"
-        Then I logged out and I am redirected on the authentication page
-      Examples:
-        | email                         | password      | account_element                       | logout_button        |
-        | pythontestemail083@gmail.com  | TestEmail123  | //*[@id="customer-account"]/div[1]/i  | //*[text()="Logout"] |
+
 
 
 

@@ -51,3 +51,9 @@ class BasePage(Browser):
 
     def wait_for_element_visibility(self, element):
         return WebDriverWait(self.chrome, 10).until(EC.visibility_of_element_located((By.XPATH, element)))
+
+    def insert_text(self, element, text):
+        self.chrome.find_element(By.XPATH, element).send_keys(text)
+
+    def wait_with_sleep(self, seconds):
+        time.sleep(seconds)
