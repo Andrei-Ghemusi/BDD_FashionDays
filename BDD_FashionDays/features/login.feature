@@ -2,7 +2,6 @@ Feature: check the functionalities of the authentication page
 
   Background:
     Given I am on the authentication page
-    And I accept the cookies
 
 
     @authentication_page @buttons_display

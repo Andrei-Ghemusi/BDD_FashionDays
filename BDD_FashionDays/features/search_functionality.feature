@@ -2,7 +2,6 @@ Feature: verify that the search functionality works correctly
 
  Background:
     Given I am on the fashion days website
-    And I accept cookies
     When I click on the search bar
     When I write in the search input the word "nike"
 
@@ -39,6 +38,7 @@ Feature: verify that the search functionality works correctly
     When I click on the first product
     When I am on the product page and I click add to basket
     When I choose the size 40
+    When I click on add to basket
     When I see message "Produsele au fost adaugate in cos."
     And I click on see basket
     When I am on the cart page

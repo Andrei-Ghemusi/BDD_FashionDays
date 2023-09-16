@@ -4,22 +4,15 @@ from selenium.common import NoSuchElementException
 
 @given('I am on the fashion days website')
 def step_impl(context):
-    context.main_page.navigate_to_main_page()
-
-@given('I accept cookies')
-def step_impl(context):
-    try:
-        context.base_page.accept_cookies()
-    except NoSuchElementException:
-        pass
+    context.base_page.navigate_to_page("https://www.fashiondays.ro/")
 
 @when('I click on the search bar')
 def step_impl(context):
-    context.base_page.click_element(element='//*[@id="mobile-search"]/span')
+    context.base_page.click_element(element='//*[@id="mobile-search"]/div/i')
 
 @when('I write in the search input the word "nike"')
 def step_impl(context):
-    context.search_functionality_page.send_input_into_search(word='nike')
+    context.base_page.insert_text(element_box='//*[@id="search-input"]', text='nike')
 
 @then('I receive a suggestion that contains the searched word')
 def step_impl(context):
@@ -72,8 +65,13 @@ def step_impl(context):
 def step_impl(context):
     context.base_page.click_element(element='//*[@id="pdp-size-select-modal"]/div[2]/ul/li[1]/div/div[1]/div/span')
 
+@when('I click on add to basket')
+def step_impl(context):
+    context.base_page.click_element(element='//*[@id="js-pdp-size-select-add"]')
+
 @when('I see message "Produsele au fost adaugate in cos."')
 def step_impl(context):
+    context.base_page.wait_for_element_visibility(element='//*[@id="basket-notification"]/span')
     context.base_page.assert_is_element_displayed(element='//*[@id="basket-notification"]/span')
     context.base_page.assert_text(text_element='//*[@id="basket-notification"]/span',
                                   expected_text='Produsele au fost adaugate in cos.')
@@ -92,6 +90,7 @@ def step_impl(context):
 
 @then('I see message "Cosul tau e gol acum, hai sa il umpli cu tot ce vrei sa porti maine!" and the cart is empty')
 def step_impl(context):
+    context.base_page.wait_for_element_visibility(element='//*[@id="full-site-canvas"]/div[3]/div/div[4]/div/div/h3')
     context.base_page.assert_is_element_displayed(element='//*[@id="full-site-canvas"]/div[3]/div/div[4]/div/div/h3')
     context.base_page.assert_text(text_element='//*[@id="full-site-canvas"]/div[3]/div/div[4]/div/div/h3',
                                   expected_text='Cosul tau e gol acum, hai sa il umpli cu tot ce vrei sa porti maine!')

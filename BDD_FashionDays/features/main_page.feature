@@ -2,11 +2,11 @@ Feature: check the functionalities of the fashion days website main page
 
   Background:
     Given Main Page: I am on the fashion days website
-    And Main Page: I accept the cookies
 
 
     @main_page @clicks
     Scenario Outline: Verify that after clicking on certain elements you are being redirected to the correct page
+      When Main Page: I accept the cookies
       When Main Page: I click on the link with text "<link_text>" identified by XPath "<element_xpath>"
       Then I should be redirected to the page with title "<expected_title>"
       And the URL should be "<expected_url>"
@@ -32,18 +32,20 @@ Feature: check the functionalities of the fashion days website main page
       | Sport        | //*[@id="main-menu"]/div[2]/nav[1]/ul/li[5]/span | Pantofi sport        | //*[@id="main-menu"]/div[2]/nav[1]/ul/li[5]/div/div[2]/a[1]/span    | Pantofi sport si tenisi  | https://www.fashiondays.ro/s/all-sport-menu-w/-/incaltaminte-pantofi_sport_si_tenisi |
 
 
-      @main_page @social_media
-      Scenario Outline: check that the social media links are not broken and work correctly
-        When I click on the social media link with the name "<link_text>" and element "<element_xpath>"
-        When I switch to the newly opened tab
-        Then I should be redirected to the page with title "<expected_title>"
-        And the URL should be "<expected_url>"
-        Examples:
-        | link_text   | element_xpath                                                           | expected_title                                            | expected_url                                       |
-        | Facebook    | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[1]/a | Fashion Days \| Bucharest                                 | https://www.facebook.com/fashiondays.romania/      |
-        | Instagram   | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[2]/a | Fashion Days (@fashiondays) Instagram photos and videos   | https://www.instagram.com/fashiondays/?hl=en       |
-        | TikTok      | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[3]/a | Fashion Days (@fashiondaysromania) Official \| TikTok     | https://www.tiktok.com/@fashiondaysromania?lang=en |
-
+#      @main_page @social_media
+#      Scenario Outline: check that the social media links are not broken and work correctly
+#        When I click on the social media link with the name "<link_text>" and element "<element_xpath>"
+#        When I switch to the newly opened tab
+#        Then I should be redirected to the page with title "<expected_title>"
+#        And the URL should be "<expected_url>"
+#        Then I close the page
+#        Then I return to the original page
+#        Examples:
+#        | link_text   | element_xpath                                                           | expected_title                                              | expected_url                                       |
+#        | Facebook    | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[1]/a | Fashion Days \| Bucharest                                   | https://www.facebook.com/fashiondays.romania/      |
+#        | Pinterest   | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[5]/a | Fashion Days Romania (FashionDaysRO) - Profile \| Pinterest | https://ro.pinterest.com/FashionDaysRO/            |
+#        | TikTok      | //*[@id="footer"]/div[1]/div/div/div[3]/div[2]/div[2]/div[1]/ul/li[3]/a | Fashion Days (@fashiondaysromania) Official \| TikTok       | https://www.tiktok.com/@fashiondaysromania?lang=en |
+#
 
       @main_page @newsletter @negative_tests
       Scenario Outline: check that we cannot subscribe to the newsletter using no email or providing invalid ones

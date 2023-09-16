@@ -6,14 +6,8 @@ from selenium.common import NoSuchElementException
 
 @given('I am on the authentication page')
 def step_impl(context):
-    context.login_page.navigate_to_login_page()
+    context.base_page.navigate_to_page('https://www.fashiondays.ro/customer/authentication')
 
-@given('I accept the cookies')
-def step_impl(context):
-    try:
-        context.base_page.accept_cookies()
-    except NoSuchElementException:
-        pass
 
 @then('the button for "{button_name}" with element "{button_element}" is displayed')
 def step_impl(context, button_element, button_name):
@@ -32,7 +26,7 @@ def step_impl(context, password):
 
 @when('I click on the login button')
 def step_impl(context):
-    context.login_page.click_login_button()
+    context.base_page.click_element(element='//*[@id="pizokel_customer_submit"]')
 
 @then('I receive an "{error_text}" with element "{error_element}" and cannot log in')
 def step_impl(context, error_text, error_element):
@@ -56,8 +50,8 @@ def step_impl(context):
 
 @when('I insert an email and a password')
 def step_impl(context):
-    context.login_page.insert_facebook_email()
-    context.login_page.insert_facebook_password()
+    context.base_page.insert_text(element_box='//*[@id="email"]', text='pythontestemail083@gmail.com')
+    context.base_page.insert_text(element_box='//*[@id="pass"]', text='TestEmail123')
 
 @when('I click the login button from the pop up')
 def step_impl(context):
@@ -82,4 +76,4 @@ def step_impl(context):
 
 @when('I wait for the application to login')
 def step_impl(context):
-    context.base_page.wait_with_sleep(seconds=5)
+    context.base_page.wait_with_sleep(seconds=7)

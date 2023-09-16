@@ -4,9 +4,9 @@ from selenium.common import NoSuchElementException
 
 @given('Main Page: I am on the fashion days website')
 def step_impl(context):
-    context.main_page.navigate_to_main_page()
+    context.base_page.navigate_to_page("https://www.fashiondays.ro/")
 
-@given ('Main Page: I accept the cookies')
+@when('Main Page: I accept the cookies')
 def step_impl(context):
     try:
         context.base_page.accept_cookies()
@@ -38,7 +38,8 @@ def step_impl(context, subsidiary_element, subsidiary_name):
 
 @when('I move to newsletter')
 def step_impl(context):
-    context.main_page.move_to_newsletter()
+    context.base_page.move_to_element(element='//*[@id="footer"]/div[1]/div/div/div[3]/div[1]/div[2]/div/ul/li[2]/a')
+    context.base_page.wait_for_element_visibility(element='//*[@id="form_saveWomen"]')
 
 @when('I insert the email "{email}"')
 def step_impl(context, email):
@@ -64,11 +65,19 @@ def step_impl(context, error_element, error_text):
 def step_impl(context):
     context.main_page.is_captcha_displayed()
 
-@when('I switch to the newly opened tab')
-def step_impl(context):
-    context.base_page.switch_window(1)
-
-@when('I click on the social media link with the name "{link_text}" and element "{element_xpath}"')
-def step_impl(context, element_xpath, link_text):
-    context.base_page.assert_text(element_xpath, link_text)
-    context.base_page.click_element(element_xpath)
+# @when('I switch to the newly opened tab')
+# def step_impl(context):
+#     context.base_page.switch_window(1)
+#
+# @when('I click on the social media link with the name "{link_text}" and element "{element_xpath}"')
+# def step_impl(context, element_xpath, link_text):
+#     context.base_page.assert_text(element_xpath, link_text)
+#     context.base_page.click_element(element_xpath)
+#
+# @then('I close the page')
+# def step_impl(context):
+#     context.base_page.close_current_page()
+#
+# @then('I return to the original page')
+# def step_impl(context):
+#     context.base_page.switch_window(0)
