@@ -60,24 +60,23 @@ def step_impl(context, submit_button_element, submit_button_text):
 def step_impl(context, error_element, error_text):
     context.base_page.assert_text(error_element, error_text)
 
-
 @then('I see the captcha being displayed')
 def step_impl(context):
     context.main_page.is_captcha_displayed()
 
-# @when('I switch to the newly opened tab')
-# def step_impl(context):
-#     context.base_page.switch_window(1)
-#
-# @when('I click on the social media link with the name "{link_text}" and element "{element_xpath}"')
-# def step_impl(context, element_xpath, link_text):
-#     context.base_page.assert_text(element_xpath, link_text)
-#     context.base_page.click_element(element_xpath)
-#
-# @then('I close the page')
-# def step_impl(context):
-#     context.base_page.close_current_page()
-#
-# @then('I return to the original page')
-# def step_impl(context):
-#     context.base_page.switch_window(0)
+@when('I switch to the newly opened tab')
+def step_impl(context):
+    context.base_page.switch_window(1)
+
+@when('I click on the social media link with the name "{link_text}" and element "{element_xpath}"')
+def step_impl(context, element_xpath, link_text):
+    context.base_page.assert_text(element_xpath, link_text)
+    context.base_page.click_element(element_xpath)
+
+@then('I close the page')
+def step_impl(context):
+    context.base_page.close_current_page()
+
+@then('I return to the original page')
+def step_impl(context):
+    context.base_page.switch_window(0)
